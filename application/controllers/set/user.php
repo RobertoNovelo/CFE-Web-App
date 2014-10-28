@@ -29,6 +29,8 @@ class user extends CFE_Controller {
             
             $date = new DateTime();
 			$timestamp = $date->format('Y-m-d H:i:s');
+			
+            $uniqID = uniqid();
             
             $newReport = array
             (
@@ -39,6 +41,7 @@ class user extends CFE_Controller {
             	'subType'			=> $subType,
             	'desc'				=> $desc,
             	'city'				=> $city,
+            	'reportTicket'		=> $uniqID,
             	'creationDate'		=> $timestamp,
             	'lastUpdate'		=> $timestamp,
             	'publicComments' 	=> json_encode(array()),

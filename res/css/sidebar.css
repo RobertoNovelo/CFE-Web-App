@@ -136,10 +136,17 @@ body {
   -o-transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
   transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
-.sidebar,
+.sidebar
+{
+  display: table-cell;
+  vertical-align: top;
+}
+
 .wrapper {
   display: table-cell;
   vertical-align: top;
+  width: 100%;
+  position:relative;
 }
 .sidebar-stacked.open + .wrapper .constructor {
   margin-left: 280px;

@@ -7,7 +7,13 @@
     <!-- Include .css files -->
     <link type="text/css" href="/res/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="/res/css/normalize.css" rel="stylesheet">
+    <link type="text/css" href="/res/css/bootstrap.min.css" rel="stylesheet">
     <link type="text/css" href="/res/css/sidebar.css" rel="stylesheet">
+    <link type="text/css" href="/res/css/autocomplete.css" rel="stylesheet">    
+    <link type="text/css" href="/res/css/adminpanel.css" rel="stylesheet">    
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC2p5YQdcMx7CxChpTC31q4IarKUhdVfwA&sensor=FALSE">
+    </script>
     <!-- Include .js files-->
     
     <script>
@@ -40,11 +46,11 @@
         </button>
         <!-- Sidebar brand image -->
         <div class="sidebar-image">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53474/atom_profile_01.jpg">
+            <img src="https://pbs.twimg.com/profile_images/473665860817547264/rH0jArBd_400x400.jpeg">
         </div>
         <!-- Sidebar brand name -->
         <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-            john.doe@gmail.com
+            roberto.novelo@smartplace.mx
             <b class="caret"></b>
         </a>
     </div>
@@ -76,66 +82,161 @@
             </ul>
         </li>
         <li>
-            <a href="#">
+            <a class="menu-action" data-section="mapSection" data-handler="loadMap" data-args="google">
                 <i class="sidebar-icon icon-material-inbox"></i>
-                Inbox
+                Mapa
             </a>
         </li>
-        <li>
-            <a href="#">
+        <!--
+<li>
+        
+                <div class="sidebar-icon truck svg-ic_local_shipping_24px"></div>
+                <i class="sidebar-icon icon-material-road"></i>
+            <a class="menu-action" data-handler="sectionManager" data-args="reports">
                 <i class="sidebar-icon icon-material-star"></i>
-                Starred
+                Reportes
             </a>
         </li>
         <li>
-            <a href="#">
+            <a class="menu-action" data-handler="sectionManager" data-args="workers">
                 <i class="sidebar-icon icon-material-send"></i>
-                Sent Mail
+                Trabajadores
             </a>
         </li>
         <li>
-            <a href="#">
+            <a class="menu-action" data-handler="sectionManager" data-args="assign">
                 <i class="sidebar-icon icon-material-drafts"></i>
-                Drafts
+                Asignar
             </a>
         </li>
+-->
         <li class="divider"></li>
         <li class="dropdown">
             <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
-                All Mail
+                Todos los reportes
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
                 <li>
-                    <a href="#" tabindex="-1">
-                        Social
-                        <span class="sidebar-badge">12</span>
+	                <a class="menu-action" data-handler="sectionManager" data-args="pending">
+                        Pendientes
+                        <span class="sidebar-badge badge-circle">10</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" tabindex="-1">
-                        Promo
-                        <span class="sidebar-badge">0</span>
+	                <a class="menu-action" data-handler="sectionManager" data-args="inProcess">
+                        En proceso
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="resolved">
+                        Resueltos
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
+                        Cerrados
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
+                        Todos
+                        <span class="sidebar-badge badge-circle">10</span>
                     </a>
                 </li>
             </ul>
         </li>
+        
+        <li class="dropdown">
+            <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+                Fallas
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="pending">
+                        Pendientes
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="inProcess">
+                        En proceso
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="resolved">
+                        Resueltos
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
+                        Cerrados
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-section="failureSection" data-handler="sectionManager" data-args="closed">
+                        Todos
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+                Quejas
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="pending">
+                        Pendientes
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="inProcess">
+                        En proceso
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="resolved">
+                        Resueltos
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
+                        Cerrados
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+                <li>
+	                <a class="menu-action" data-section="issueSection" data-handler="sectionManager">
+                        Todos
+                        <span class="sidebar-badge badge-circle">10</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        
         <li>
-            <a href="#">
-                Trash
+            <a class="menu-action" data-section="workerSection">
+                Trabajadores
                 <span class="sidebar-badge">3</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                Spam
-                <span class="sidebar-badge">456</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                Follow Up
-                <span class="sidebar-badge badge-circle">i</span>
+            <a class="menu-action">
+                Sucursales
+                <span class="sidebar-badge badge-circle">456</span>
             </a>
         </li>
     </ul>
@@ -146,66 +247,194 @@
     <!--  <div class="sidebar-text">Text</div> -->
 </aside>
 
+
 <div class="wrapper">
     <!-- Sidebar Constructor -->
-    <div class="constructor">
-        <h2 class="headline">Material Sidebar (Profile menu)</h2>
-        <p class="subhead">Based on <a href="https://www.google.com/design/spec/material-design/introduction.html" target="_blank">Material Design by Google</a>.</p>
-        <p>Tested on Win8.1 with browsers: Chrome 37,  Firefox 32, Opera 25, IE 11, Safari 5.1.7</p>
-        <hr />
-        <p>You can use this sidebar in Bootstrap (v3) projects. HTML-markup like <a href="http://getbootstrap.com/components/#navbar" target="_blank">Navbar bootstrap component</a> will make your work easier.</p>
-        <p>Dropdown menu and sidebar toggle button works with JQuery and Bootstrap.min.js</p>
-        <hr />
-        <h2 class="headline">Sidebar Constructor</h2>
-        <p>
-            <label for="sidebar-position">Sidebar postion</label>
-            <select id="sidebar-position" name="sidebar-position">
-                <option value="">Default</option>
-                <option value="sidebar-fixed-left">Float on left</option>
-                <option value="sidebar-fixed-right">Float on right</option>
-                <option value="sidebar-stacked">Stacked on left</option>
-            </select>
-        </p>
-        <p>
-            <label for="sidebar-theme">Sidebar theme</label>
-            <select id="sidebar-theme" name="sidebar-theme">
-                <option value="sidebar-default">Default</option>
-                <option value="sidebar-inverse">Inverse</option>
-                <option value="sidebar-colored">Colored</option>
-                <option value="sidebar-colored-inverse">Colored-Inverse</option>
-            </select>
-        </p>
-        <p>
-            <label for="sidebar-header">Sidebar header cover</label>
-            <select id="sidebar-header" name="sidebar-header">
-                <option value="header-cover">Image cover</option>
-                <option value="">Color cover</option>
-            </select>
-        </p>
-        <p><button class="sidebar-toggle">Toggle sidebar</button></p>
-    </div>
-</div>
-
-	<div class="row">
-		<div class="col-xs-6">
-		MisKuentas
-		</div>
-		<div class="col-xs-6">
-		Pendejos
+    <div id="mapSection" class="row active-section">
+    	
+    	<div class="issues-map-details">
+    		<div class="row search-bar">
+    			<div class="col-xs-10 search-bar-input">
+					<input tabindex="1" id="mapSearch" type="search" autocomplete="off" class="search-input" id="input_nombre"  name="nombre" placeholder="Queja, Falla, Empleado o Todos">
+				</div>
+    			<div tabindex="2" class="col-xs-2 search-bar-btn">
+	   				<img class="search-img" src="/res/icon/search-white.png">
+				</div>
+    		</div>
+    	</div>
+   		<div class="search-results-container" style="display:none">
+	   		<div class="close-search-results">
+	   			<img class="close-img" src="/res/icon/close-btn.png">
+	   		</div>
+	   		
+	   		<div id="resultsContainer">
+		   		<div id="noResultsContainer" class="row result-header center-text">
+		   			<div class="col-xs-12">
+	   					<p>No se encontraron coincidencias!</p>
+	   				</div>
+		   		</div>
+		   		<div id="allResultsContainer" class="row result-header center-text">
+		   			<div class="col-xs-12">
+		   				<div class="row">
+		   					<div class="col-xs-12">
+	   							<h5>Total de <span id="totalLabel"></span>:<span id="totalNumberLabel"></span></h5>
+		   					</div>
+		   				</div>
+		   				<div class="row">
+							<div class="col-xs-12 center-text accept-btn-layout">
+						        <button id="showAllResults" class="btn btn-lg accept-btn">Mostrar</button>
+						    </div>
+		   				</div>
+	   				</div>
+		   		</div>
+		   		<div id="resultHeader" style="display:none" class="row result-header center-text">
+	   				<div class="col-xs-3">
+	   					<p>ID de reporte:</p>
+	   				</div>
+	   				<div class="col-xs-6">
+	   					<p>Trabajador Asignado:</p>
+	   				</div>
+	   				<div class="col-xs-3">
+	   					<p style="text-align:left">Estado:</p>
+	   				</div>
+	   			</div>
+	   			<div id="resultItems">
+	   			</div>
+	   		</div>
+	   		
+   		</div>
+    
+		<div class="col-xs-12 center-text">
+			<div id="googleMap" class="mapwrapper"></div>
 		</div>
 	</div>
+    
+    <div id="failureSection">
+    	
+    	<div id="fLoading">
+    	</div>
+    
+    	<div id="failureList">
+    	</div>
+    	
+    	<div id="failureDetails">
+    		
+    		<div class="report-details center-text">
+    			<div class="row">
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			</div>
+    			<div class="row">
+    			
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			<div class="row">
+    			
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			<div class="row">
+    			
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			<div class="row">
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			<div class="row">
+    			
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			<div class="row">
+    			
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			<div class="row">
+    			
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			<div class="row">
+    			
+    				<div class="col-xs-12">
+    					<h2>Novelo</h2>
+    				</div>
+    			
+    			</div>
+    			
+    		</div>
+    		
+    	
+    		<div class="report-details-map">
+    		</div>
+    		<div class="back-to-list-section">
+    			<button id="fBackToList" class="btn btn-lg accept-btn">Volver a la Lista</button>
+    		</div>
+    	</div>
+    
+	</div>
+    
+    <div id="issueSection">
+    
+    	<div id="sLoading">
+    	</div>
+    	
+    	<div id="issueList">
+    	</div>
+    	
+    	<div id="issueDetails">
+    		
+    	</div>
+    
+	</div>
+    
+    
+    <div id="workerSection">
+    
+    	<div id="wLoading">
+    	</div>
+    	
+    	<div id="workerList">
+    	</div>
+    	
+    	<div id="workerDetails">
+    	</div>
+    
+	</div>
+	
+</div>
 
-
-    <script type="text/javascript" src="/res/js/jquery-2.1.1.min.js">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
+    <script type="text/javascript" src="/res/js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="/res/js/bootstrap.min.js"></script>
     
 
-	<script src="/res/js/localstorage.js"></script>
-	<script src="/res/js/rememberscroll.js"></script>
+	<script type="text/javascript" src="/res/js/localstorage.js"></script>
+	<script type="text/javascript" src="/res/js/rememberscroll.js"></script>
 	
-    <script type="text/javascript" src="/res/js/sidebar.js">
-    </script>
+    <script type="text/javascript" src="/res/js/lib/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="/res/js/sidebar.js"></script>
+    <script type="text/javascript" src="/res/js/cfemap.js"></script>
+    <script type="text/javascript" src="/res/js/adminpanel.js"></script>
 
 
 </body>

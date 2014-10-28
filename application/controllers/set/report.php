@@ -45,10 +45,10 @@ class report extends CFE_Controller {
 					$estado = "Pendiente";
 				break;
 				case 2:
-					$estado = "En revisión";
+					$estado = "En proceso";
 				break;
 				case 3:
-					$estado = "Resolviendo";
+					$estado = "Resuelto";
 				break;
 				default:
 					$estado = "Cerrado";
