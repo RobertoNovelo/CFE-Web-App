@@ -247,6 +247,8 @@ function initServerData()
 		
 	    var dataArray = $.map(serverData.data, function (value, key) { return { value: key, data: value }; });
 		
+		loadAllListSections();
+		
 		// Initialize ajax autocomplete:
 	    $('#mapSearch').autocomplete({
 	        // serviceUrl: '/autosuggest/service/url',
@@ -315,6 +317,81 @@ function openWorkerDetails(identifier)
 }
 
 
+function loadAllListSections()
+{
+	
+	
+	
+	console.log('Sections loaded successfully');
+}
+
+function getAllReportsList()
+{
+	var html = '';
+	
+	for(var k in serverData.data) 
+	{
+		if(!serverData.data[k].all)
+		{
+			if((1 == serverData.data[k].dataType) || (1 == serverData.data[k].dataType))
+			{
+				
+				addMarker(k);	
+			}
+		}
+	}
+	
+}
+
+function sectionManager(context,args)
+{
+	var arr = args.split('-');
+	
+	var itemsDataType	= 0;
+	var status			= 0;
+	var itemsSubType	= 0;
+	
+	switch (arr[0])
+	{
+		case ("all"):
+		{
+			switch (arr[1])
+			{
+				case ("pending"):
+				{
+					alert(arr[1]);
+				}
+				break;
+				case ("inprocess"):
+				{
+					alert(arr[1]);
+				}
+				break;
+				case ("resolved"):
+				{
+					alert(arr[1]);
+				}
+				break;
+				case ("closed"):
+				{
+					alert(arr[1]);
+				}
+				break;
+				case ("all"):
+				{
+					alert(arr[1]);
+				}
+				break;
+			}
+		}
+		break;
+	}
+}
+
+function getListItem()
+{
+	
+}
 
 
 

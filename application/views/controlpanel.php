@@ -12,7 +12,7 @@
     <link type="text/css" href="/res/css/autocomplete.css" rel="stylesheet">    
     <link type="text/css" href="/res/css/adminpanel.css" rel="stylesheet">    
     <script type="text/javascript"
-      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC2p5YQdcMx7CxChpTC31q4IarKUhdVfwA&sensor=FALSE">
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDbRh5DhkpxMpjVGpjXQDq0sWgo-CK64k0&sensor=FALSE">
     </script>
     <!-- Include .js files-->
     
@@ -118,31 +118,31 @@
             </a>
             <ul class="dropdown-menu">
                 <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="pending">
+	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-pending">
                         Pendientes
                         <span class="sidebar-badge badge-circle">10</span>
                     </a>
                 </li>
                 <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="inProcess">
+	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-inprocess">
                         En proceso
                         <span class="sidebar-badge badge-circle">10</span>
                     </a>
                 </li>
                 <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="resolved">
+	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-resolved">
                         Resueltos
                         <span class="sidebar-badge badge-circle">10</span>
                     </a>
                 </li>
                 <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
+	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-closed">
                         Cerrados
                         <span class="sidebar-badge badge-circle">10</span>
                     </a>
                 </li>
                 <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
+	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-all">
                         Todos
                         <span class="sidebar-badge badge-circle">10</span>
                     </a>
@@ -309,117 +309,28 @@
 		</div>
 	</div>
     
-    <div id="failureSection">
-    	
-    	<div id="fLoading">
+    <div id="listSection">
+    	<div id="listLoading">
     	</div>
     
-    	<div id="failureList">
-    	</div>
+    	<div id="listView">
     	
-    	<div id="failureDetails">
-    		
-    		<div class="report-details center-text">
-    			<div class="row">
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			</div>
-    			<div class="row">
-    			
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			<div class="row">
-    			
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			<div class="row">
-    			
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			<div class="row">
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			<div class="row">
-    			
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			<div class="row">
-    			
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			<div class="row">
-    			
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			<div class="row">
-    			
-    				<div class="col-xs-12">
-    					<h2>Novelo</h2>
-    				</div>
-    			
-    			</div>
-    			
-    		</div>
     		
     	
-    		<div class="report-details-map">
-    		</div>
-    		<div class="back-to-list-section">
-    			<button id="fBackToList" class="btn btn-lg accept-btn">Volver a la Lista</button>
-    		</div>
-    	</div>
-    
-	</div>
-    
-    <div id="issueSection">
-    
-    	<div id="sLoading">
     	</div>
     	
-    	<div id="issueList">
-    	</div>
+    	<div id="itemDetails">
     	
-    	<div id="issueDetails">
     		
     	</div>
-    
+    	
+    	<div class="back-to-list-section">
+			<button style="display:none" id="backToList" class="btn btn-lg accept-btn">Volver a la Lista</button>
+		</div>
+		
 	</div>
     
     
-    <div id="workerSection">
-    
-    	<div id="wLoading">
-    	</div>
-    	
-    	<div id="workerList">
-    	</div>
-    	
-    	<div id="workerDetails">
-    	</div>
-    
-	</div>
 	
 </div>
 
