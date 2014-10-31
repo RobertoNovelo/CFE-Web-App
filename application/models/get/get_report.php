@@ -49,4 +49,17 @@ class get_report extends CI_Model {
 		}
 		
 	}
+
+	public function get_data_by_reportID($reportID)
+	{
+		$this->db->select('user_data.pushToken');
+		$this->db->select('report_data.reportTicket');
+
+		$this->db->where_in('report_data.id',$reportID);
+
+		$this->db->join('report_data', 'user_data.id = report_data.userID', 'left');
+
+		return $this->db->get('user_data')->row();
+	}
+
 }
