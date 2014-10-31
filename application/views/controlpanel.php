@@ -87,29 +87,6 @@
                 Mapa
             </a>
         </li>
-        <!--
-<li>
-        
-                <div class="sidebar-icon truck svg-ic_local_shipping_24px"></div>
-                <i class="sidebar-icon icon-material-road"></i>
-            <a class="menu-action" data-handler="sectionManager" data-args="reports">
-                <i class="sidebar-icon icon-material-star"></i>
-                Reportes
-            </a>
-        </li>
-        <li>
-            <a class="menu-action" data-handler="sectionManager" data-args="workers">
-                <i class="sidebar-icon icon-material-send"></i>
-                Trabajadores
-            </a>
-        </li>
-        <li>
-            <a class="menu-action" data-handler="sectionManager" data-args="assign">
-                <i class="sidebar-icon icon-material-drafts"></i>
-                Asignar
-            </a>
-        </li>
--->
         <li class="divider"></li>
         <li class="dropdown">
             <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
@@ -149,94 +126,11 @@
                 </li>
             </ul>
         </li>
-        
-        <li class="dropdown">
-            <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
-                Fallas
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="pending">
-                        Pendientes
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="inProcess">
-                        En proceso
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="resolved">
-                        Resueltos
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
-                        Cerrados
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-section="failureSection" data-handler="sectionManager" data-args="closed">
-                        Todos
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="dropdown">
-            <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
-                Quejas
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="pending">
-                        Pendientes
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="inProcess">
-                        En proceso
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="resolved">
-                        Resueltos
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-handler="sectionManager" data-args="closed">
-                        Cerrados
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-                <li>
-	                <a class="menu-action" data-section="issueSection" data-handler="sectionManager">
-                        Todos
-                        <span class="sidebar-badge badge-circle">10</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        
+        <li class="divider"></li>
         <li>
             <a class="menu-action" data-section="workerSection">
                 Trabajadores
                 <span class="sidebar-badge">3</span>
-            </a>
-        </li>
-        <li>
-            <a class="menu-action">
-                Sucursales
-                <span class="sidebar-badge badge-circle">456</span>
             </a>
         </li>
     </ul>
@@ -321,7 +215,6 @@
     	
     	<div id="itemDetails">
     	
-    		
     	</div>
     	
     	<div class="back-to-list-section">
