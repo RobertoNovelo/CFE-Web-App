@@ -95,17 +95,44 @@ class report extends CFE_Controller {
            		if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$account)) 
            		{
            			$this->send_report_email($account,$msg);
+           			$response['requestStatus'] = 'OK';
+           		}
+
+           		else
+           		{
+           			$response['requestStatus'] = 'NOK1';
            		}
             	
             }
 
             else
             {
-            	//Twitter API Update
-            }
-            
-           
+            	$settings = array(
+				    'oauth_access_token' => "2853549970-8I1dNqZZqXY1AohZAw3YGf8SfnJfqZCRm2jHNsA",
+				    'oauth_access_token_secret' => "pAHzrLL79DKpRhhWWhyLni79pYOIb6lAMuEHa1BNVv7WT",
+				    'consumer_key' => "U571bltELyhBGZHTTCZJqScat",
+				    'consumer_secret' => "8HgZiefgum3E2FLgjpUh6R3ZAkJLqumaknfzqI0di6hwcoW2qz"
+				);
+
+				$url = 'https://api.twitter.com/1.1/statuses/update.json';
+				$requestMethod = 'POST';
+
+
+				$postfields = array(
+				    'status' => '@$account El estatus de su reporte #$reportTicket a cambiado a $estado'
+				);
+
+				$twitter = new TwitterAPIExchange($settings);
+
+				$twitter->buildOauth($url, $requestMethod)
+				        ->setPostfields($postfields)
+				        ->performRequest();
+
+				 $response['requestStatus'] = 'OK';
+		    }
+
         }
+
         else
         {
 	        $response['requestStatus'] = 'NOK1';
