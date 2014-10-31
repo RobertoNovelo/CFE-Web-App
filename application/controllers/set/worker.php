@@ -33,7 +33,29 @@ class worker extends CFE_Controller {
         
         echo json_encode($response);
 	}
-	
+
+   
+	 public function assign()
+    {
+        $workerID       = $this->input->post('workerID');
+        $reportTicket   = $this->input->post('reportTicket');
+        
+        if($workerID && $reportTicket)
+        {
+            $this->load->model('set/set_worker');
+            
+            $this->set_worker->assign_worker($workerID,$reportTicket);
+            
+            $response['requestStatus'] = 'OK';  
+        }
+
+        else
+        {
+            $response['requestStatus'] = 'NOK1';    
+        }
+        
+        echo json_encode($response);
+    }
 	
 	public function index()
 	{

@@ -46,5 +46,12 @@ class set_worker extends CI_Model {
 		$this->db->set('pushID',$pushID);
 		$this->db->update('worker_data');
 	}
+
+	function assign_worker($workerID,$reportTicket)
+	{
+		$this->db->where('reportTicket',$reportTicket);
+		$this->db->set('workerID',$workerID);
+		$this->db->update('report_data');
+	}
 	
 }
