@@ -30,7 +30,6 @@ class user extends CFE_Controller {
 	        	{	
 		        	$response['reports'][$i] = $userReports[$i];
 		        	$response['reports'][$i]->publicComments = json_decode($userReports[$i]->publicComments);
-		        	$response['reports'][$i]->privateComments = json_decode($userReports[$i]->privateComments);
 	        	}
 
         	}
