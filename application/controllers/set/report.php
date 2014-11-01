@@ -32,11 +32,12 @@ class report extends CFE_Controller {
 		$workerID	= $this->input->post('workerID');
         $reportID	= $this->input->post('reportID');
         $status		= $this->input->post('status');
-        $session 	= $this->input->post('session'); //1 for mail, 2 for twitter
-        $account 	= $this->input->post('account'); //mail or twitter depending on session
+
+        error_reporting(E_ALL);
+		ini_set('display_errors', 1);
 
         //Validate inputs used when session==1;
-        if ($workerID && $reportID && $status && $session && $account)
+        if ($workerID && $reportID && $status)
         {
         	$this->load->model('set/set_report');
         	
@@ -88,48 +89,9 @@ class report extends CFE_Controller {
             
             $this->set_worker->public_comment($reportID,json_encode($publicComment));
             
-	       // $response['requestStatus'] = 'OK';
-            
-            if($session == 1)
-            {
-           		if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$account)) 
-           		{
-           			$this->send_report_email($account,$msg);
-           			$response['requestStatus'] = 'OK';
-           		}
+	    	$response['requestStatus'] = 'OK';
 
-           		else
-           		{
-           			$response['requestStatus'] = 'NOK1';
-           		}
-            	
-            }
-
-            else
-            {
-            	$settings = array(
-				    'oauth_access_token' => "2853549970-8I1dNqZZqXY1AohZAw3YGf8SfnJfqZCRm2jHNsA",
-				    'oauth_access_token_secret' => "pAHzrLL79DKpRhhWWhyLni79pYOIb6lAMuEHa1BNVv7WT",
-				    'consumer_key' => "U571bltELyhBGZHTTCZJqScat",
-				    'consumer_secret' => "8HgZiefgum3E2FLgjpUh6R3ZAkJLqumaknfzqI0di6hwcoW2qz"
-				);
-
-				$url = 'https://api.twitter.com/1.1/statuses/update.json';
-				$requestMethod = 'POST';
-
-
-				$postfields = array(
-				    'status' => '@$account El estatus de su reporte #$reportTicket a cambiado a $estado'
-				);
-
-				$twitter = new TwitterAPIExchange($settings);
-
-				$twitter->buildOauth($url, $requestMethod)
-				        ->setPostfields($postfields)
-				        ->performRequest();
-
-				 $response['requestStatus'] = 'OK';
-		    }
+            $this->notify_report_user($reportID,$estado);
 
         }
 
@@ -181,44 +143,6 @@ class report extends CFE_Controller {
 	    curl_close($ch);
 	}
 
-	private function send_report_email($account,$comment)
-	{
-
-		$data['comment'] =  $comment;
-
-		$date = new DateTime();
-
-		$data['date'] = $date->format('Y-m-d'); 
-
-		$data['time'] = $date->format('H:i'); 
-
-		$this->load->library('email');
-				
-				$config = array(
-				    'protocol'  => 'smtp',
-				    'smtp_host' => 'email-smtp.us-west-2.amazonaws.com',
-				    'smtp_user' => 'AKIAJQEBYV6CQWDDLRMA',
-				    'smtp_pass' => 'AkcJTy/jsFMy0Uu6gC0VPRVAuTNl3CpWwv+Lx7qZ4KH1',
-				    'smtp_port' => 465,
-				    'newline'   => "\r\n",
-				    'mailtype' => 'html',
-				    'smtp_crypto' => 'ssl'
-				);
-				
-				$this->email->initialize($config);
-				
-			    $this->email->clear();
-			
-			    $this->email->to($account);
-			    $this->email->from('hola@retofutbol.com', 'CFE');
-			    $this->email->subject("Reporte de CFE");
-				
-				$msg = $this->load->view('estatus_reporte',$data,TRUE);
-				
-				$this->email->message($msg);
-				$this->email->send();
-	}
-
 	public function test()
 	{
 		$settings = array(
@@ -241,6 +165,52 @@ class report extends CFE_Controller {
 		$twitter->buildOauth($url, $requestMethod)
 		        ->setPostfields($postfields)
 		        ->performRequest();
+	}
+
+	private function notify_report_user($reportID,$status)
+	{
+		$email = $this->get_report->email_account($reportID);
+		$twitter = $this->get_report->twitter_account($reportID);
+
+		if($email)
+        {
+       		if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) 
+       		{
+       			$this->send_report_email($email,"El estado de tu reporte #$reportID ha cambiado a $status.");
+       			$response['requestStatus'] = 'OK';
+       		}
+
+       		else
+       		{
+       			//Do nothing, parameter is not an email.
+       		}
+        	
+        }
+        if ($twitter)
+        {
+        	$settings = array(
+			    'oauth_access_token' => "2853549970-8I1dNqZZqXY1AohZAw3YGf8SfnJfqZCRm2jHNsA",
+			    'oauth_access_token_secret' => "pAHzrLL79DKpRhhWWhyLni79pYOIb6lAMuEHa1BNVv7WT",
+			    'consumer_key' => "U571bltELyhBGZHTTCZJqScat",
+			    'consumer_secret' => "8HgZiefgum3E2FLgjpUh6R3ZAkJLqumaknfzqI0di6hwcoW2qz"
+			);
+
+			$url = 'https://api.twitter.com/1.1/statuses/update.json';
+			$requestMethod = 'POST';
+
+
+			$postfields = array(
+			    'status' => "@". $twitter . " El estado de tu reporte #$reportID ha cambiado a $status."
+			);
+
+			$twitter = new TwitterAPIExchange($settings);
+
+			$twitter->buildOauth($url, $requestMethod)
+			        ->setPostfields($postfields)
+			        ->performRequest();
+
+			 $response['requestStatus'] = 'OK';
+	    }
 	}
 
 }

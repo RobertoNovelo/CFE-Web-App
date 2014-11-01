@@ -62,4 +62,46 @@ class get_report extends CI_Model {
 		return $this->db->get('user_data')->row();
 	}
 
+	function email_account($reportID)
+	{
+		$this->db->select('email');
+		$this->db->where('email IS NOT NULL');
+		$this->db->where('id',$reportID);
+
+		if ($this->db->count_all_results('report_data') > 0)
+		{
+			$this->db->select('email');
+			$this->db->where('email IS NOT NULL');
+			$this->db->where('id',$reportID);
+
+
+
+			return $this->db->get('report_data')->row()->email;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function twitter_account($reportID)
+	{
+		$this->db->select('twitter');
+		$this->db->where('twitter IS NOT NULL');
+		$this->db->where('id',$reportID);
+
+		if ($this->db->count_all_results('report_data') > 0)
+		{
+			$this->db->select('twitter');
+			$this->db->where('twitter IS NOT NULL');
+			$this->db->where('id',$reportID);
+
+			return $this->db->get('report_data')->row()->twitter;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 }
