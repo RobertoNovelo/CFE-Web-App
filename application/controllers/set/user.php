@@ -84,6 +84,7 @@ ini_set('display_errors', 1);
             	//No assigned reports
         	}
         	        	
+        	$response['reportID'] = $uniqID;	
         	$response['requestStatus'] = 'OK';	
 		}
 		else
@@ -100,8 +101,7 @@ ini_set('display_errors', 1);
         {
        		if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) 
        		{
-       			$this->send_report_email($email,'Tu reporte se ha creado exitosamente!');
-       			$response['requestStatus'] = 'OK';
+       			$this->send_report_email($email,"Tu reporte #$reportTicket se ha creado exitosamente!");
        		}
 
        		else
@@ -132,8 +132,6 @@ ini_set('display_errors', 1);
 			$twitter->buildOauth($url, $requestMethod)
 			        ->setPostfields($postfields)
 			        ->performRequest();
-
-			 $response['requestStatus'] = 'OK';
 	    }
 	}
 }
