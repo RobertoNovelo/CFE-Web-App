@@ -104,4 +104,12 @@ class get_report extends CI_Model {
 		}
 	}
 
+	function ticket_id($reportID)
+	{
+		$this->db->select('reportTicket');
+		$this->db->where('id',$reportID);
+
+		return $this->db->get('report_data')->row()->reportTicket;
+	}
+
 }

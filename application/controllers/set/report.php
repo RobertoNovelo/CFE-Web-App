@@ -172,11 +172,13 @@ class report extends CFE_Controller {
 		$email = $this->get_report->email_account($reportID);
 		$twitter = $this->get_report->twitter_account($reportID);
 
+		$reportTicket = $this->get_report->ticket_id($reportID);
+
 		if($email)
         {
        		if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) 
        		{
-       			$this->send_report_email($email,"El estado de tu reporte #$reportID ha cambiado a $status.");
+       			$this->send_report_email($email,"El estado de tu reporte #$reportTicket ha cambiado a $status.");
        			$response['requestStatus'] = 'OK';
        		}
 
@@ -200,7 +202,7 @@ class report extends CFE_Controller {
 
 
 			$postfields = array(
-			    'status' => "@". $twitter . " El estado de tu reporte #$reportID ha cambiado a $status."
+			    'status' => "@". $twitter . " El estado de tu reporte #$reportTicket ha cambiado a $status."
 			);
 
 			$twitter = new TwitterAPIExchange($settings);
