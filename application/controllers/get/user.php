@@ -36,6 +36,7 @@ class user extends CFE_Controller {
         	else
         	{
             	//No assigned reports
+            	$response['reports'] = array();
         	}
 
         	
