@@ -1,5 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+
+require_once(BASEPATH . '../application/libraries/TwitterAPIExchange.php');
+
 class user extends CFE_Controller {
 
 	/**
@@ -21,9 +24,15 @@ class user extends CFE_Controller {
 		$subType	= $this->input->post('subType');
 		$desc		= $this->input->post('desc');
 		$city		= $this->input->post('city');
+		$rpu		= $this->input->post('rpu');
+		$email		= $this->input->post('email');
+		$twitter	= $this->input->post('twitter');
+
+		error_reporting(E_ALL);
+ini_set('display_errors', 1);
 		
 		
-		if($userID && $lat && $lng && $type && $subType && $desc && $city)
+		if($userID && $lat && $lng && $type && $subType && $desc && $city && $rpu && ($email || $twitter))
 		{
 			$this->load->model('set/set_user');
             
@@ -35,6 +44,7 @@ class user extends CFE_Controller {
             $newReport = array
             (
             	'userID'			=> $userID,
+            	'rpu'				=> $rpu,
             	'lat'				=> $lat,
             	'lng'				=> $lng,
             	'type'				=> $type,
@@ -42,6 +52,8 @@ class user extends CFE_Controller {
             	'desc'				=> $desc,
             	'city'				=> $city,
             	'reportTicket'		=> $uniqID,
+            	'email'				=> $email,
+            	'twitter'			=> $twitter,
             	'creationDate'		=> $timestamp,
             	'lastUpdate'		=> $timestamp,
             	'publicComments' 	=> json_encode(array()),
@@ -49,6 +61,8 @@ class user extends CFE_Controller {
             );    	
             
             $this->set_user->report($newReport);
+
+            $this->report_successfully_created_notification($email,$twitter,$uniqID);
            
             $this->load->model('get/get_user');
                 	
@@ -80,7 +94,48 @@ class user extends CFE_Controller {
 		echo json_encode($response);
 	}
 	
-	
+	private function report_successfully_created_notification($email,$twitter,$reportTicket)
+	{
+		if($email)
+        {
+       		if (preg_match("/([\w\-]+\@[\w\-]+\.[\w\-]+)/",$email)) 
+       		{
+       			$this->send_report_email($email,'Tu reporte se ha creado exitosamente!');
+       			$response['requestStatus'] = 'OK';
+       		}
+
+       		else
+       		{
+       			//Do nothing, parameter is not an email.
+       		}
+        	
+        }
+        elseif ($twitter)
+        {
+        	$settings = array(
+			    'oauth_access_token' => "2853549970-8I1dNqZZqXY1AohZAw3YGf8SfnJfqZCRm2jHNsA",
+			    'oauth_access_token_secret' => "pAHzrLL79DKpRhhWWhyLni79pYOIb6lAMuEHa1BNVv7WT",
+			    'consumer_key' => "U571bltELyhBGZHTTCZJqScat",
+			    'consumer_secret' => "8HgZiefgum3E2FLgjpUh6R3ZAkJLqumaknfzqI0di6hwcoW2qz"
+			);
+
+			$url = 'https://api.twitter.com/1.1/statuses/update.json';
+			$requestMethod = 'POST';
+
+
+			$postfields = array(
+			    'status' => "@". $twitter . " Tu reporte #$reportTicket se creó exitosamente."
+			);
+
+			$twitter = new TwitterAPIExchange($settings);
+
+			$twitter->buildOauth($url, $requestMethod)
+			        ->setPostfields($postfields)
+			        ->performRequest();
+
+			 $response['requestStatus'] = 'OK';
+	    }
+	}
 }
 
 /* End of file auth.php */
