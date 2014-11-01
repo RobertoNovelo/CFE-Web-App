@@ -110,7 +110,7 @@ ini_set('display_errors', 1);
        		}
         	
         }
-        elseif ($twitter)
+        if ($twitter)
         {
         	$settings = array(
 			    'oauth_access_token' => "2853549970-8I1dNqZZqXY1AohZAw3YGf8SfnJfqZCRm2jHNsA",
