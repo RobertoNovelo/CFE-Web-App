@@ -208,13 +208,66 @@
     	</div>
     
     	<div id="listView">
-    	
-    		
-    	
     	</div>
     	
-    	<div id="itemDetails">
-    	
+    	<div class="center-text" id="itemDetails" style="display:none;">
+           
+            <div class="row details-header">
+                <div class="col-xs-7 col-xs-offset-1">
+                   <img id="detailsMapPreview">
+                </div>
+                <div class="col-xs-3">
+                    <div class="row">
+                        <div class="col-xs-12 header-item-card-container">
+                            <h5>ID de Reporte:</h5>
+                            <h5 id="itemReportIDLabel"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 header-item-card-container">
+                            <h5>Tipo de Reporte:</h5>
+                            <h5 id="itemTypeLabel"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 header-item-card-container">
+                            <h5>Estado de Reporte:</h5>
+                            <h5 id="itemStatusLabel"></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 header-item-card-container">
+                            <h5>Fecha de creación:</h5>
+                            <h5 id="itemCreationDateLabel"></h5>
+                        </div>
+                    </div>
+                    <div class="details-divider"></div>
+                    <div class="row">
+                        <div class="col-xs-12 header-item-card-container">
+                            <h5>Empleado asignado:</h5>
+                            <h5 id="itemWorkerName"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+
+           
+            <div class="row">
+               <div class="col-xs-3">
+                   <h5 id="itemReportIDLabel"></h5>
+               </div>
+               <div class="col-xs-3">
+                   <h5 id="itemTypeLabel"></h5>
+               </div>
+               <div class="col-xs-3">
+                   <h5 id="itemStatusLabel"></h5>
+               </div>
+               <div class="col-xs-3">
+                   <h5 id="itemCreationDateLabel"></h5>
+               </div>
+            </div>
+
     	</div>
     	
     	<div class="back-to-list-section">

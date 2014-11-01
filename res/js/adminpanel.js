@@ -1,4 +1,5 @@
 var serverData;
+var workerArr;
 var resultsFound = false;
 var currentResult = null;
 var loadingInterval = null;
@@ -246,6 +247,24 @@ function initServerData()
 	{
 		serverData = response;
 
+		var workerData = new Object;
+
+		workerData.data = new Object;
+
+		for(var k in serverData.data)
+		{
+			if(!serverData.data[k].all)
+			{
+				if(3 == serverData.data[k].dataType)
+				{
+					workerData.data[k] = serverData.data[k];
+				}
+			}
+		}
+
+
+		workerArr = $.map(workerData.data, function (value, key) { return { value: key, data: value }; });
+
 	    var dataArray = $.map(serverData.data, function (value, key) { return { value: key, data: value }; });
 
 		loadAllListSections();
@@ -334,9 +353,8 @@ function getAllReportsList()
 	{
 		if(!serverData.data[k].all)
 		{
-			if((1 == serverData.data[k].dataType) || (1 == serverData.data[k].dataType))
+			if((1 == serverData.data[k].dataType) || (2 == serverData.data[k].dataType))
 			{
-
 				addMarker(k);
 			}
 		}
@@ -400,12 +418,13 @@ function sectionManager(context,args)
 
 function buildList(selector,subselector)
 {
+	$("#listView").slideUp('slow');
 	$("#itemDetails").slideUp('slow');
 
 	setTimeout( function()
 	{
 
-		$("#itemDetails").empty();
+		$("#listView").empty();
 
 		var htmlChild = null;
 
@@ -441,24 +460,21 @@ function buildList(selector,subselector)
 
 		$(document).on("click",'.listReportDetails', function()
 		{
-			showListReportDetails($(this).data('listreportidentifier'));
+			showReportDetails($(this).data('listreportidentifier'));
 		});
 
 
-		$("#itemDetails").slideDown('slow');
+		$("#listView").slideDown('slow');
 	},1000);
 
 }
 
 function addReportListChild(html)
 {
-	setTimeout(function () 
-	{
-		$("#itemDetails").append(html);
-	},100);
+	$("#listView").append(html);
 }
 
-function showListReportDetails(itemID)
+function showReportDetails(itemID)
 {
 	var itemTicket			= serverData.data[itemID].reportTicket;
 	var itemType			= serverData.data[itemID].dataType;
@@ -471,9 +487,25 @@ function showListReportDetails(itemID)
 	var itemStatus 			= serverData.data[itemID].status;
 	var itemCreationDate	= serverData.data[itemID].creationDate;
 	var itemLastUpdate		= serverData.data[itemID].lastUpdate;
+	var itemWorkerName		= serverData.data[itemID].workerName;
 
+	$("#detailsMapPreview").attr({
+		src: 'http://maps.googleapis.com/maps/api/staticmap?center=' + itemLat + ','+ itemLng +'&zoom=15&size=640x640&maptype=terrain&markers=color:blue%7C' + itemLat + ','+ itemLng + '&sensor=false'
+	});
+	
+	$("#itemReportIDLabel").text(itemTicket);
+	$("#itemTypeLabel").text(itemType);
+	$("#itemStatusLabel").text(itemStatus);
+	$("#itemCreationDateLabel").text(itemCreationDate);
+	$("#itemWorkerName").text(itemWorkerName);
 
+	$("#listView").slideUp('slow', function()
+	{
+		//Details animation is seen until list slideUp Animation is completed
+		$("#itemDetails").slideDown('slow');
+	});
 
+	console.log(workerArr);
 
 }
 

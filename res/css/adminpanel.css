@@ -176,6 +176,12 @@
 	overflow-y: auto;
 }
 
+#itemDetails > .row
+{
+	margin-left:0;
+	margin-right: 0;
+}
+
 .white-background
 {
 	background: white;
@@ -206,7 +212,37 @@
 	margin-bottom: 5vh;
 }
 
+.details-map-preview
+{
+	margin:0;
+	margin-top: 3vh;
+	margin-bottom: 3vh;
+}
 
+.details-header
+{
+	margin-top: 3vh;
+	margin-bottom: 3vh;
+}
+
+#detailsMapPreview
+{
+	max-width: 100%;
+}
+
+
+.header-item-card-container
+{
+	background:#FFF;
+	border-bottom:3px solid #BBB;
+	border-right:3px solid #BBB;
+	vertical-align: middle;
+}
+
+.details-divider
+{
+	margin-top: 3vh;
+}
 
 
 
