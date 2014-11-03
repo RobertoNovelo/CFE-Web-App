@@ -16,7 +16,7 @@ class auth extends CFE_Controller {
 	{
         $userName	= $this->input->post('userName');
         $password	= $this->input->post('password');
-        $pushID		= $this->input->post('pushID');
+        $pushID		= $this->input->post('pushToken');
 
         $key		= 'nkobvcevl7o87dfho9386qrho6b7eorato323kd9';
         
