@@ -43,7 +43,7 @@ class set_worker extends CI_Model {
 	function push_id($workerID, $pushID)
 	{
 		$this->db->where('id',$workerID);
-		$this->db->set('pushID',$pushID);
+		$this->db->set('pushToken',$pushID);
 		$this->db->update('worker_data');
 	}
 

@@ -36,7 +36,7 @@ class worker_auth_model extends CI_Model {
 	function set_push_id($userID,$pushID)
 	{
 		$this->db->where('id',$userID);
-		$this->db->set('pushID',$pushID);
+		$this->db->set('pushToken',$pushID);
 		$this->db->update('worker_data');
 	}
 	
