@@ -3,6 +3,7 @@ var workerArr;
 var resultsFound = false;
 var currentResult = null;
 var loadingInterval = null;
+var selectedEmployee = null;
 
 $(document).ready(function() {
 
@@ -69,6 +70,66 @@ $(function() {
 		allResultsHandler();
 	});
 
+	$('#assignWorker').on('click',function()
+	{
+		$('#assignWorkerModal').modal();
+	});
+
+	$('#confirmWorker').on('click', function()
+	{
+		console.log("worker Confirmed");
+
+		if(selectedEmployee)
+		{
+			var workerID = serverData.data[selectedEmployee].workerID;
+
+			var reportTicket = $("#itemReportIDLabel").text();
+
+			showCardErrorMessage(reportTicket);
+
+			$.post( "/set/worker/assign", 
+			{
+				reportTicket: reportTicket,
+				workerID: workerID
+			}, 
+			
+			function(response)
+			{
+				if("OK" == response.requestStatus)
+				{
+					showCardErrorMessage('Asignado correctamente!');
+					$("#itemWorkerName").text(serverData.data[selectedEmployee].workerName);
+					$("#itemWorkerName").show();
+					$('#assignWorker').text('Cambiar');
+					$('#workerSearch').val('');
+					selectedEmployee = null;
+					initServerData();
+
+					setTimeout(function()
+					{
+						$('#assignWorkerModal').modal('hide');
+					},2000);
+				}
+				else
+				{
+					showCardErrorMessage('Ocurrió un error al asignar el empleado');
+					selectedEmployee = null;
+				}
+			}, 'json')
+			.fail(function(d)
+			{
+				selectedEmployee = null;
+				showCardErrorMessage('Ocurrió un error al asignar el empleado');
+			});
+
+		}
+		else
+		{
+			showCardErrorMessage('Selecciona un empleado');
+		}
+
+	});
+
 });
 
 function allResultsHandler()
@@ -85,16 +146,6 @@ function allResultsHandler()
 			}
 		}
 	}
-}
-
-function showCardErrorMessage(message)
-{
-	$(".alert-text").html(message);
-	$(".invalidInputsReg").show('slow');
-	setTimeout(function()
-	{
-		$(".invalidInputsReg").hide('slow');
-	},2000);
 }
 
 google.maps.event.addDomListener(window, 'load', initializeMap);
@@ -269,7 +320,10 @@ function initServerData()
 
 		loadAllListSections();
 
-		// Initialize ajax autocomplete:
+		//Erase previous data
+		$('#mapSearch').autocomplete('clear');
+
+		// Initialize autocomplete:
 	    $('#mapSearch').autocomplete({
 	        // serviceUrl: '/autosuggest/service/url',
 	        lookup: dataArray,
@@ -285,6 +339,35 @@ function initServerData()
 
 	            resultsFound = true;
 	            currentResult = suggestion.data;
+
+	        },
+	        onHint: function (hint) {
+	            console.log(hint);
+	        },
+	        onInvalidateSelection: function() {
+	            resultsFound = false;
+	            console.log('You selected: none');
+	        }
+	    });
+
+	    //Erase previous data
+	    $('#workerSearch').autocomplete('clear');
+
+	    // Initialize autocomplete:
+	    $('#workerSearch').autocomplete({
+	        // serviceUrl: '/autosuggest/service/url',
+	        lookup: workerArr,
+	        groupBy: 'category',
+	        lookupFilter: function(suggestion, originalQuery, queryLowerCase) {
+	            var re = new RegExp('\\b' + $.Autocomplete.utils.escapeRegExChars(queryLowerCase), 'gi');
+	            return re.test(suggestion.value);
+	        },
+	        onSelect: function(suggestion) {
+	            console.log('You selected: ' + suggestion.value + ', ' + suggestion.data.dataType);
+
+	            console.log('Results Loaded');
+
+	            selectedEmployee = suggestion.value;
 
 	        },
 	        onHint: function (hint) {
@@ -333,15 +416,11 @@ function loadingDetails(section)
 function openWorkerDetails(identifier)
 {
 	var reportType = serverData.data[identifier].dataType;
-
 }
 
 
 function loadAllListSections()
 {
-
-
-
 	console.log('Sections loaded successfully');
 }
 
@@ -497,7 +576,18 @@ function showReportDetails(itemID)
 	$("#itemTypeLabel").text(itemType);
 	$("#itemStatusLabel").text(itemStatus);
 	$("#itemCreationDateLabel").text(itemCreationDate);
-	$("#itemWorkerName").text(itemWorkerName);
+
+	if(itemWorkerName)
+	{
+		$("#itemWorkerName").text(itemWorkerName);
+		$("#itemWorkerName").show();
+		$('#assignWorker').text('Cambiar');
+	}
+	else
+	{
+		$("#itemWorkerName").hide();
+		$('#assignWorker').text('Asignar');
+	}
 
 	$("#listView").slideUp('slow', function()
 	{
@@ -509,8 +599,15 @@ function showReportDetails(itemID)
 
 }
 
-
-
+function showCardErrorMessage(message)
+{
+	$(".alert-text").html(message);							
+	$(".invalidInputsReg").show('slow');
+	setTimeout(function()
+	{
+		$(".invalidInputsReg").hide('slow');
+	},2000);
+}
 
 
 
