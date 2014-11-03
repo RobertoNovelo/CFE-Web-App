@@ -245,13 +245,12 @@
                     <div class="row">
                         <div class="col-xs-12 header-item-card-container">
                             <h5>Empleado asignado:</h5>
-                            <h5 id="itemWorkerName"></h5>
+                            <h5 style="display:none" id="itemWorkerName"></h5>
+                            <button id="assignWorker" class="btn btn-lg accept-btn">Asignar</button>
                         </div>
                     </div>
                 </div>
             </div>
-           
-
            
             <div class="row">
                <div class="col-xs-3">
@@ -275,10 +274,30 @@
 		</div>
 		
 	</div>
-    
-    
-	
 </div>
+
+    <!-- Assign Worker Modal -->
+    <div class="modal fade" id="assignWorkerModal" tabindex="-1" role="dialog" aria-labelledby="assignWorkerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="assignWorkerModalLabel">Asignar Empleado...</h4>
+                </div>
+                <div class="modal-body center-text">
+                    <input tabindex="1" class="form-control center-text" id="workerSearch" type="search" autocomplete="off"  placeholder="Nombre ó Número de Empleado">
+                    <div class="invalidInputsReg" style="display: none;">
+                        <div class="alert-text alert alert-danger center-text" role="alert">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmWorker" class="btn btn-primary">Asignar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	
     <script type="text/javascript" src="/res/js/jquery-2.1.1.min.js"></script>
