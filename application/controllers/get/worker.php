@@ -22,6 +22,8 @@ class worker extends CFE_Controller {
                 	
         	$userReports = $this->get_worker->reports($workerID);
         	
+        	$response['reports'] = array();
+        	
         	if($userReports)
         	{
             	$count = count($userReports);
