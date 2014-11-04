@@ -8,7 +8,7 @@ class set_worker extends CI_Model {
 	
 	public function public_comment($reportID,$comment)
 	{
-		$this->db->where('id',$reportID);
+		$this->db->where('reportTicket',$reportID);
 		$this->db->set('publicComments',$comment);
 		
 		$date = new DateTime();
@@ -21,7 +21,7 @@ class set_worker extends CI_Model {
 	
 	public function private_comment($reportID,$comment)
 	{
-		$this->db->where('id',$reportID);
+		$this->db->where('reportTicket',$reportID);
 		$this->db->set('privateComments',$comment);
 		
 		$date = new DateTime();

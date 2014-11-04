@@ -16,12 +16,12 @@ class get_report extends CI_Model {
 	
 	public function publicComment_by_id($reportID)
 	{
-		$this->db->where('id', $reportID);
+		$this->db->where('reportTicket', $reportID);
 		$this->db->where('active', 1);
 		
 		if ($this->db->count_all_results('report_data') > 0)
 		{
-			$this->db->where('id', $reportID);
+			$this->db->where('reportTicket', $reportID);
 			$this->db->where('active', 1);
 			return $this->db->get('report_data')->row()->publicComments;
 		}
@@ -34,12 +34,12 @@ class get_report extends CI_Model {
 	
 	public function privateComment_by_id($reportID)
 	{
-		$this->db->where('id', $reportID);
+		$this->db->where('reportTicket', $reportID);
 		$this->db->where('active', 1);
 		
 		if ($this->db->count_all_results('report_data') > 0)
 		{
-			$this->db->where('id', $reportID);
+			$this->db->where('reportTicket', $reportID);
 			$this->db->where('active', 1);
 			return $this->db->get('report_data')->row()->privateComments;
 		}
@@ -66,13 +66,13 @@ class get_report extends CI_Model {
 	{
 		$this->db->select('email');
 		$this->db->where('email IS NOT NULL');
-		$this->db->where('id',$reportID);
+		$this->db->where('reportTicket',$reportID);
 
 		if ($this->db->count_all_results('report_data') > 0)
 		{
 			$this->db->select('email');
 			$this->db->where('email IS NOT NULL');
-			$this->db->where('id',$reportID);
+			$this->db->where('reportTicket',$reportID);
 
 
 
@@ -88,13 +88,13 @@ class get_report extends CI_Model {
 	{
 		$this->db->select('twitter');
 		$this->db->where('twitter IS NOT NULL');
-		$this->db->where('id',$reportID);
+		$this->db->where('reportTicket',$reportID);
 
 		if ($this->db->count_all_results('report_data') > 0)
 		{
 			$this->db->select('twitter');
 			$this->db->where('twitter IS NOT NULL');
-			$this->db->where('id',$reportID);
+			$this->db->where('reportTicket',$reportID);
 
 			return $this->db->get('report_data')->row()->twitter;
 		}
