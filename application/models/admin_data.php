@@ -10,6 +10,7 @@ class admin_data extends CI_Model {
 	{
 		$this->db->select('id as reportID');
 		$this->db->where('type',1);
+		$this->db->where('active',1);
 		$failureIDs = $this->db->get('report_data')->result();
 	
 		$count  = count($failureIDs);
@@ -43,6 +44,7 @@ class admin_data extends CI_Model {
 	{
 		$this->db->select('id as reportID');
 		$this->db->where('type',2);
+		$this->db->where('active',1);
 		$issueIDs = $this->db->get('report_data')->result();
 	
 		$count  = count($issueIDs);
@@ -107,6 +109,7 @@ class admin_data extends CI_Model {
 	function get_total_failures()
 	{
 		$this->db->where('type', 1);
+		$this->db->where('active',1);
 		return $this->db->count_all_results('report_data');
 		
 	}
@@ -114,6 +117,7 @@ class admin_data extends CI_Model {
 	function get_total_issues()
 	{
 		$this->db->where('type', 2);
+		$this->db->where('active',1);
 		return $this->db->count_all_results('report_data');
 		
 	}
