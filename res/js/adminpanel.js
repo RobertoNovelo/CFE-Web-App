@@ -75,6 +75,74 @@ $(function() {
 		$('#assignWorkerModal').modal();
 	});
 
+	$('#userPush').on('click', function()
+	{
+		var message = $('#userPushMessage').val();
+
+		if(message)
+		{
+			$.post( "/send/user/push_message_to_all", 
+			{
+				pushMessage: message
+			}, 
+			function(response)
+			{
+				if(response.ok)
+				{
+					showCardErrorMessage('Mensaje enviado a los usuarios!');
+					$('#pushMessage').val('');
+				}
+				else
+				{
+					showCardErrorMessage('Ocurrió un error al enviar el mensaje');
+				}
+			}, 'json')
+			.fail(function(d)
+			{
+				showCardErrorMessage('Ocurrió un error al enviar el mensaje');
+			});
+		}
+		else
+		{
+			showCardErrorMessage('Introduce un mensaje para los usuarios!');
+		}
+
+	});
+
+	$('#workerPush').on('click', function()
+	{
+		var message = $('#workerPushMessage').val();
+
+		if(message)
+		{
+			$.post( "/send/worker/push_message_to_all", 
+			{
+				pushMessage: message
+			}, 
+			function(response)
+			{
+				if(response.ok)
+				{
+					showCardErrorMessage('Mensaje enviado a los empleados!');
+					$('#pushMessage').val('');
+				}
+				else
+				{
+					showCardErrorMessage('Ocurrió un error al enviar el mensaje');
+				}
+			}, 'json')
+			.fail(function(d)
+			{
+				showCardErrorMessage('Ocurrió un error al enviar el mensaje');
+			});
+		}
+		else
+		{
+			showCardErrorMessage('Introduce un mensaje para los empleados!');
+		}
+
+	});
+
 	$('#confirmWorker').on('click', function()
 	{
 		console.log("Worker Confirmed");
@@ -457,6 +525,11 @@ function initServerData()
 function loadMap()
 {
 	console.log('Map section selected');
+}
+
+function loadNotifications()
+{
+	console.log('Notifications section selected');
 }
 
 
