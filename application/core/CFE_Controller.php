@@ -73,5 +73,62 @@ class CFE_Controller extends CI_Controller {
 		$this->email->message($msg);
 		$this->email->send();
 	}
+
+	protected function CFE_ReporteFallas()
+	{
+		$string = 'usrReto071@R3t0C3r053t3nt4yUn0@iOS8.1IPhone6201.124.20.103375262054121usuariotmp@example.comFavor de revisar el serviciovlw3xMqy9LNjQMs5rE4z';
+
+		$hash = sha1($string);
+
+		$acceso = array(
+
+				'UsuarioMovil'		=>	"usrReto071",
+				'PasswordMovil'		=>	"@R3t0C3r053t3nt4yUn0@",
+				'SistemaOperativo'	=>	"iOS",
+				'VersionSO'			=>	"8.1",
+				'TipoEquipo'		=>	"IPhone",
+				'ModeloEquipo'		=>	"6",
+				'Ip'				=>	"201.124.20.103",
+				'Hash'				=>	$hash
+			);
+
+		$rpu = "375262054121";
+
+		$correo = "usuariotmp@example.com";
+
+		$observaciones  = "Favor de revisar el servicio";
+
+		$TipoFalla = "08";
+
+		$client = new SoapClient('http://aplicaciones.cfe.gob.mx/WebServices/CFEMovil/CFEMovil.svc?wsdl',array('trace' => true));
+ 
+  		$response = $client->SELReporteFallas(array("Acceso"=>$acceso , "Rpu"=>$rpu , "Correo"=>$correo, "Observaciones" =>$observaciones, "TipoFalla" => $TipoFalla));
+
+		return $response->SELReporteFallasResult->Folio;
+
+	}
+
+
+	private function send_http_request($url , $data) 
+	{
+	    $request = json_encode($data);
+	 
+	    $ch = curl_init();
+
+	    $ch = curl_init($url);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch, CURLOPT_HEADER, true);
+	    curl_setopt($ch, CURLOPT_POST, true);
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+	 
+	    $response = curl_exec($ch);
+	    $info = curl_getinfo($ch);
+	    curl_close($ch);
+
+	    return $response;
+	}
+
+
 	
 }
+
