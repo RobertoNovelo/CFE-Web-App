@@ -38,6 +38,7 @@ class public_comment extends CFE_Controller {
             	'date'			=> $timestamp
             );
             
+            $this->send_push_to_report_owner($reportID);
             
             $this->load->model('set/set_worker');
             
@@ -73,7 +74,15 @@ class public_comment extends CFE_Controller {
         echo json_encode($response);
 	}
 	
-	
+	private function send_push_to_report_owner($reportID)
+    {
+        $this->load->model('get/get_report');
+
+        $pushToken[] = $this->get_report->owner_push_token($reportID);
+
+        $this->send_push_message($pushToken, "Tu reporte $reportID tiene un nuevo comentario");
+
+    }
 }
 
 /* End of file auth.php */

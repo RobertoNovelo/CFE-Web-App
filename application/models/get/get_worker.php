@@ -20,4 +20,11 @@ class get_worker extends CI_Model {
 		$this->db->select('CONCAT(name, " ", fLastName, " ", sLastName) AS workerName', FALSE);
 		return $this->db->get('worker_data')->row()->workerName;
 	}
+
+	public function push_tokens()
+	{
+		$this->db->select('pushToken');
+		$this->db->where('pushToken is not null');
+		return $this->db->get('worker_data')->result_array();
+	}
 }

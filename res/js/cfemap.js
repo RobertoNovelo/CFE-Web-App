@@ -57,7 +57,6 @@ function addMarker(identifier)
 	{
 		case(1):
 		{
-			img = '/res/icon/workermarker.png';
 			subType = serverData.data[identifier].subType;
 			var creationDate = serverData.data[identifier].creationDate;
 			setTimeout(function() 
@@ -68,7 +67,6 @@ function addMarker(identifier)
 		break;
 		case(2):
 		{
-			img = '/res/icon/workermarker.png';
 			subType = serverData.data[identifier].subType;
 			var creationDate = serverData.data[identifier].creationDate;
 			setTimeout(function() 
@@ -79,7 +77,6 @@ function addMarker(identifier)
 		break;
 		case(3):
 		{
-			img = '/res/icon/workermarker.png';
 			label="Trabajadores";
 			var workerID = serverData.data[identifier].workerID;
 			setTimeout(function() 

@@ -112,4 +112,18 @@ class get_report extends CI_Model {
 		return $this->db->get('report_data')->row()->reportTicket;
 	}
 
+	function owner_push_token($reportTicket)
+	{
+		$this->db->select('userID');
+		$this->db->where('reportTicket',$reportTicket);
+
+		$userID =  $this->db->get('report_data')->row()->userID;
+
+		$this->db->select('pushToken');
+		$this->db->where('id',$userID);
+
+		return $this->db->get('user_data')->row()->pushToken;
+	}
+
+
 }

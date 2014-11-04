@@ -133,6 +133,13 @@
                 <!-- <span class="sidebar-badge">3</span> -->
             </a>
         </li>
+        <li class="divider"></li>
+        <li>
+            <a class="menu-action" data-section="notificationSection" data-handler="loadNotifications" data-args="map">
+                Notificación
+                <!-- <span class="sidebar-badge">3</span> -->
+            </a>
+        </li>
     </ul>
     <!-- Sidebar divider -->
     <!-- <div class="sidebar-divider"></div> -->
@@ -280,6 +287,44 @@
 		</div>
 		
 	</div>
+
+    <div id="notificationSection">
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3 push-form header-item-card-container center-text">
+                <div class="row push-form-item">
+                    <div class="col-xs-12">
+                        <h5>Introduce el mensaje para los usuarios</h5>
+                    </div>
+                </div>
+                <div class="row push-form-item">
+                    <div class="col-xs-12">
+                        <input tabindex="1" class="form-control center-text" id="userPushMessage" type="text" autocomplete="off" >
+                    </div>
+                </div>
+                <button id="userPush" class="btn btn-lg accept-btn push-btn">Asignar</button>
+            </div>
+
+
+            <div class="col-xs-6 col-xs-offset-3 push-form header-item-card-container center-text">
+                <div class="row push-form-item">
+                    <div class="col-xs-12">
+                        <h5>Introduce el mensaje para los empleados</h5>
+                    </div>
+                </div>
+                <div class="row push-form-item">
+                    <div class="col-xs-12">
+                        <input tabindex="1" class="form-control center-text" id="workerPushMessage" type="text" autocomplete="off" >
+                    </div>
+                </div>
+                <button id="workerPush" class="btn btn-lg accept-btn push-btn">Asignar</button>
+            </div>
+
+            <div class="invalidInputsReg" style="display: none;">
+                <div class="alert-text alert alert-danger center-text" role="alert">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
     <!-- Assign Worker Modal -->
