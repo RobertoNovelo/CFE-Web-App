@@ -1,4 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+//Defines for PushWoosh API
+define('PW_AUTH', 'aDVeMECq0x8npwH7EzYdML8xzGNiJiN4wZf7c3drrhFUWAPrGYQCGROPkBihftilPHEcJOAzbt41O4vFJIuE');
+define('PW_APPLICATION', '93E84-ECC19');
 
 class CFE_Controller extends CI_Controller {
 	
@@ -126,6 +129,94 @@ class CFE_Controller extends CI_Controller {
 	    curl_close($ch);
 
 	    return $response;
+	}
+
+	protected function send_push_message($pushArr, $message)
+	{
+		$this->send_push($message, $pushArr);
+	}
+
+	protected function push_to_all_users($message)
+	{
+		$this->load->model('get/get_user');
+
+		$pushTokens = $this->get_user->push_tokens();
+
+		$count = count($pushTokens);
+
+		$pushArr = array();
+
+		for($i=0; $i<$count; $i++)
+		{
+			if(null != $pushTokens[$i]['pushToken'])
+			{
+				$pushArr[] = $pushTokens[$i]['pushToken'];
+			}
+		}
+
+		$this->send_push($message, $pushArr);
+
+	}
+
+	protected function push_to_all_workers($message)
+	{
+		$this->load->model('get/get_worker');
+
+		$pushTokens = $this->get_worker->push_tokens();
+
+		$count = count($pushTokens);
+
+		$pushArr = array();
+
+		for($i=0; $i<$count; $i++)
+		{
+			if(null != $pushTokens[$i]['pushToken'])
+			{
+				$pushArr[] = $pushTokens[$i]['pushToken'];
+			}
+		}
+
+		$this->send_push($message, $pushArr);
+
+	}
+
+	private function send_push($message,$pushTokens)
+	{
+
+		$this->pwCall('createMessage',[
+	    'application' => PW_APPLICATION,
+	    'auth' => PW_AUTH,
+	    'notifications' => [
+       					 		[
+   								'send_date' => 'now',
+        					 	'content' => $message,
+       	   					 	'data' => ['custom' => 'json data'],
+       	   					 	'devices'=>$pushTokens
+       							 ]
+        					]
+   		 				]
+		);
+	}
+
+
+	private function pwCall($method , $data) 
+	{
+	    $url = 'https://cp.pushwoosh.com/json/1.3/' . $method;
+	    $request = json_encode(['request' => $data]);
+	 
+	    $ch = curl_init();
+
+	    $ch = curl_init($url);
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+	    curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+	    curl_setopt($ch, CURLOPT_HEADER, true);
+	    curl_setopt($ch, CURLOPT_POST, true);
+	    curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
+	 
+	    $response = curl_exec($ch);
+	    $info = curl_getinfo($ch);
+	    curl_close($ch);
 	}
 
 
