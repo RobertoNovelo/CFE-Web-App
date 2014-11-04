@@ -77,7 +77,7 @@ $(function() {
 
 	$('#confirmWorker').on('click', function()
 	{
-		console.log("worker Confirmed");
+		console.log("Worker Confirmed");
 
 		if(selectedEmployee)
 		{
@@ -126,6 +126,72 @@ $(function() {
 		else
 		{
 			showCardErrorMessage('Selecciona un empleado');
+		}
+
+	});
+
+	$('#confirmAddWorker').on('click', function()
+	{
+		var workerUserName			= $('#workerUserName').val();
+		var workerName 				= $('#workerName').val();
+		var workerfLastName			= $('#workerfLastName').val();
+		var workersLastName			= $('#workersLastName').val();
+		var workerPassword			= $('#workerPassword').val();
+		var workerVerifyPassword	= $('#workerVerifyPassword').val();
+
+		if(workerUserName && workerName && workerfLastName && workersLastName && workerPassword && workerVerifyPassword)
+		{
+			if(workerPassword == workerVerifyPassword)
+			{
+				$.post( "/set/worker", 
+				{
+					userName: 	workerUserName,
+					password: 	workerPassword,
+					name: 		workerName,
+					fLastName: 	workerfLastName,
+					sLastName: 	workersLastName
+				},
+				function(response)
+				{
+					if("OK" == response.requestStatus)
+					{
+						showCardErrorMessage('Asignado correctamente!');
+						
+						initServerData();
+
+						setTimeout(function()
+						{
+							$('#workerUserName').val('');
+							$('#workerName').val('');
+							$('#workerfLastName').val('');
+							$('#workersLastName').val('');
+							$('#workerPassword').val('');
+							$('#workerVerifyPassword').val('');
+
+							$('#addWorkerModal').modal('hide');
+
+							sectionManager(window, "type-worker");
+
+						},2000);
+					}
+					else
+					{
+						showCardErrorMessage('Ocurrió un error al agregar al empleado');
+					}
+				}, 'json')
+				.fail(function(d)
+				{
+					showCardErrorMessage('Ocurrió un error al agregar al empleado');
+				});
+			}
+			else
+			{
+				showCardErrorMessage('Las contraseñas no coinciden!');
+			}
+		}
+		else
+		{
+			showCardErrorMessage('Por favor completa los campos!');
 		}
 
 	});
@@ -266,29 +332,31 @@ function reportResultsHandler()
 	}
 	else
 	{
+		var total=1;
+		var label=null;
 
 		switch(currentResult.dataType)
 		{
-	    	case (1):
-	    	{
-	        	console.log("Failure selected");
-	    	}
-	    	break;
-
-	    	case (2):
-	    	{
-	        	console.log("Issue selected");
-	    	}
-	    	break;
-
-	    	case (3):
-	    	{
-	        	console.log("Worker selected");
-	    	}
-	    	break;
+	    	case(1):
+			{
+				label="Fallas";
+			}
+			break;
+			case(2):
+			{
+				label="Quejas";
+			}
+			break;
+			case(3):
+			{
+				label="Trabajadores";
+			}
+			break;
 		}
 
-		$("#resultHeader").show();
+		$("#totalLabel").html(label);
+		$("#totalNumberLabel").html(total);
+		$("#allResultsContainer").show();
 	}
 }
 
@@ -447,6 +515,7 @@ function sectionManager(context,args)
 
 	var itemsDataType	= 0;
 	var status			= 0;
+	var type			= 0;
 	var itemsSubType	= 0;
 	var selectBy		= "type";
 
@@ -491,6 +560,35 @@ function sectionManager(context,args)
 		}
 		break;
 
+		case ("type"):
+		{
+
+			selectBy = "type";
+
+			switch (arr[1])
+			{
+				case ("failure"):
+				{
+					type = 1;
+				}
+				break;
+				case ("issue"):
+				{
+					type = 2;
+				}
+				break;
+				case ("worker"):
+				{
+					type = 3;
+				}
+				break;			
+			}
+
+			buildList(selectBy,type);
+
+		}
+		break;
+
 
 	}
 }
@@ -520,20 +618,40 @@ function buildList(selector,subselector)
 						{
 							htmlChild = '<div class="row card-container list-item"><div class="col-xs-3"><img class="map-preview" src="http://maps.googleapis.com/maps/api/staticmap?center=' + serverData.data[k].lat + ','+ serverData.data[k].lng +'&zoom=15&size=150x150&maptype=terrain&markers=color:blue%7C'+ serverData.data[k].lat +','+ serverData.data[k].lng +'&sensor=false"></div><div class="col-xs-6"><div class="row"><div class="col-xs-12"><h5>ID: '+ serverData.data[k].reportTicket +'</h5></div></div><div class="row"><div class="col-xs-12"><h5>Creation Date: '+ serverData.data[k].creationDate +'</h5></div></div></div><div class="col-xs-3"><button data-listreportidentifier="'+ k + '" class="btn btn-lg accept-btn listReportDetails">Detalles</button></div></div>';
 		
-		            		addReportListChild(htmlChild);
+		            		addListChild(htmlChild);
 						}
 						else if(subselector == serverData.data[k].status)
 						{
 							htmlChild = '<div class="row card-container list-item"><div class="col-xs-3"><img class="map-preview" src="http://maps.googleapis.com/maps/api/staticmap?center=' + serverData.data[k].lat + ','+ serverData.data[k].lng +'&zoom=15&size=150x150&maptype=terrain&markers=color:blue%7C'+ serverData.data[k].lat +','+ serverData.data[k].lng +'&sensor=false"></div><div class="col-xs-6"><div class="row"><div class="col-xs-12"><h5>ID: '+ serverData.data[k].reportTicket +'</h5></div></div><div class="row"><div class="col-xs-12"><h5>Creation Date: '+ serverData.data[k].creationDate +'</h5></div></div></div><div class="col-xs-3"><button data-listreportidentifier="'+ k + '" class="btn btn-lg accept-btn listReportDetails">Detalles</button></div></div>';
 		
-		            		addReportListChild(htmlChild);
+		            		addListChild(htmlChild);
 						}
 					}
 				}
-				else
+				else if("type" == selector)
 				{
+					//Select type
+					if(subselector == serverData.data[k].dataType)
+					{
+						htmlChild = '<div class="row card-container list-item"> <div class="col-xs-4"> <div class="row"> <div class="col-xs-12"> <h5>Nombre:</h5> <h5>'+ serverData.data[k].workerName +'</h5> </div></div></div><div class="col-xs-4"> <div class="row"> <div class="col-xs-12"> <h5>Reportes Asignados:</h5> <h5>2</h5> </div></div></div><div class="col-xs-4"> </div></div>';
+						
+						//worker details button
+						//<button data-listworkeridentifier="' + k + '" class="btn btn-lg accept-btn listWorkerDetails">Detalles</button>
 
+	            		addListChild(htmlChild);
+
+	            		console.log(serverData.data[k].dataType);
+
+					}
 				}
+			}
+		}
+
+		if("type" == selector)
+		{
+			if( 3 == subselector)
+			{
+				addListChild('<div class="row list-item center-text"> <div class="col-xs-12"> <button class="btn btn-lg accept-btn addWorker">Agregar Empleado</button> </div></div>');
 			}
 		}
 
@@ -542,13 +660,23 @@ function buildList(selector,subselector)
 			showReportDetails($(this).data('listreportidentifier'));
 		});
 
+		$(document).on("click",'.listWorkerDetails', function()
+		{
+			console.log('worker details');
+		});
+
+		$(document).on("click",'.addWorker', function()
+		{
+			$('#addWorkerModal').modal();
+		});
+
 
 		$("#listView").slideDown('slow');
 	},1000);
 
 }
 
-function addReportListChild(html)
+function addListChild(html)
 {
 	$("#listView").append(html);
 }

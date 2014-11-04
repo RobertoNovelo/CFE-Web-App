@@ -60,36 +60,36 @@
         <li class="dropdown">
             <ul id="settings-dropdown" class="dropdown-menu">
                 <li>
-                    <a href="#" tabindex="-1">
+                    <a tabindex="-1">
                         Profile
                     </a>
                 </li>
                 <li>
-                    <a href="#" tabindex="-1">
+                    <a tabindex="-1">
                         Settings
                     </a>
                 </li>
                 <li>
-                    <a href="#" tabindex="-1">
+                    <a tabindex="-1">
                         Help
                     </a>
                 </li>
                 <li>
-                    <a href="#" tabindex="-1">
+                    <a tabindex="-1">
                         Exit
                     </a>
                 </li>
             </ul>
         </li>
         <li>
-            <a class="menu-action" data-section="mapSection" data-handler="loadMap" data-args="google">
+            <a class="menu-action" data-section="mapSection" data-handler="loadMap" data-args="map">
                 <i class="sidebar-icon icon-material-inbox"></i>
                 Mapa
             </a>
         </li>
         <li class="divider"></li>
         <li class="dropdown">
-            <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+            <a class="ripple-effect dropdown-toggle" data-toggle="dropdown">
                 Todos los reportes
                 <b class="caret"></b>
             </a>
@@ -97,40 +97,40 @@
                 <li>
 	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-pending">
                         Pendientes
-                        <span class="sidebar-badge badge-circle">10</span>
+                        <!-- <span class="sidebar-badge badge-circle">10</span> -->
                     </a>
                 </li>
                 <li>
 	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-inprocess">
                         En proceso
-                        <span class="sidebar-badge badge-circle">10</span>
+                        <!-- <span class="sidebar-badge badge-circle">10</span> -->
                     </a>
                 </li>
                 <li>
 	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-resolved">
                         Resueltos
-                        <span class="sidebar-badge badge-circle">10</span>
+                        <!-- <span class="sidebar-badge badge-circle">10</span> -->
                     </a>
                 </li>
                 <li>
 	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-closed">
                         Cerrados
-                        <span class="sidebar-badge badge-circle">10</span>
+                        <!-- <span class="sidebar-badge badge-circle">10</span> -->
                     </a>
                 </li>
                 <li>
 	                <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="all-all">
                         Todos
-                        <span class="sidebar-badge badge-circle">10</span>
+                        <!-- <span class="sidebar-badge badge-circle">10</span> -->
                     </a>
                 </li>
             </ul>
         </li>
         <li class="divider"></li>
         <li>
-            <a class="menu-action" data-section="workerSection">
+            <a class="menu-action" data-section="listSection" data-handler="sectionManager" data-args="type-worker">
                 Trabajadores
-                <span class="sidebar-badge">3</span>
+                <!-- <span class="sidebar-badge">3</span> -->
             </a>
         </li>
     </ul>
@@ -294,6 +294,40 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button type="button" id="confirmWorker" class="btn btn-primary">Asignar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assign Worker Modal -->
+    <div class="modal fade" id="addWorkerModal" tabindex="-1" role="dialog" aria-labelledby="addWorkerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="addWorkerModalLabel">Agregar Empleado...</h4>
+                </div>
+                <div class="modal-body center-text">
+                    <h5>Nombre de Usuario</h5>
+                    <input tabindex="1" class="form-control center-text" id="workerUserName" type="text" autocomplete="off" >
+                    <h5>Nombre</h5>
+                    <input tabindex="1" class="form-control center-text" id="workerName" type="text" autocomplete="off" >
+                    <h5>Apellido Paterno</h5>
+                    <input tabindex="1" class="form-control center-text" id="workerfLastName" type="text" autocomplete="off" >
+                    <h5>Apellido Materno</h5>
+                    <input tabindex="1" class="form-control center-text" id="workersLastName" type="text" autocomplete="off" >
+                    <h5>Contraseña</h5>
+                    <input tabindex="1" class="form-control center-text" id="workerPassword" type="password" autocomplete="off" >
+                    <h5>Verifica la Contraseña</h5>
+                    <input tabindex="1" class="form-control center-text" id="workerVerifyPassword" type="password" autocomplete="off" >
+                    <div class="invalidInputsReg" style="display: none;">
+                        <div class="alert-text alert alert-danger center-text" role="alert">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmAddWorker" class="btn btn-primary">Agregar</button>
                 </div>
             </div>
         </div>
