@@ -250,8 +250,20 @@
 	margin-bottom: 8px
 }
 
+.push-form
+{
+	margin-top: 10vh;
+}
 
+.push-form-item
+{
+	margin-top: 5vh
+}
 
-
+.push-btn
+{
+	margin-top: 5vh;
+	margin-bottom: 5vh;
+}
 
     		
