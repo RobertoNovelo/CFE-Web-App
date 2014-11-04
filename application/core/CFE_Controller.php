@@ -74,41 +74,37 @@ class CFE_Controller extends CI_Controller {
 		$this->email->send();
 	}
 
-	protected function CFE_ObtenerEstados()
+	protected function CFE_ReporteFallas()
 	{
-		$AccesoCliente = new stdClass();
+		$string = 'usrReto071@R3t0C3r053t3nt4yUn0@iOS8.1IPhone6201.124.20.103375262054121usuariotmp@example.comFavor de revisar el serviciovlw3xMqy9LNjQMs5rE4z';
 
-		$AccesoCliente->UsuarioMovil		=	"usrReto071";
-		$AccesoCliente->PasswordMovil	=	"@R3t0C3r053t3nt4yUn0@";
-		$AccesoCliente->SistemaOperativo	=	"Ubuntu";
-		$AccesoCliente->VersionSO		=	"14.04.1 LTS";
-		$AccesoCliente->TipoEquipo		=	"AWS EC2 Instance";
-		$AccesoCliente->ModeloEquipo		=	"t2 micro";
-		$AccesoCliente->ResolucionEquipo	=	"not available";
-		$AccesoCliente->IP				=	"54.69.204.188";
-		$AccesoCliente->Ubicacion		=	"not available";
+		$hash = sha1($string);
 
-		$hashString = "usrReto071@R3t0C3r053t3nt4yUn0@Ubuntu14.04.1 LTSAWS EC2 Instancet2 micronot available54.69.204.188not availablevlw3xMqy9LNjQMs5rE4z";
+		$acceso = array(
 
-		$AccesoCliente->Hash				=	sha1($hashString);
+				'UsuarioMovil'		=>	"usrReto071",
+				'PasswordMovil'		=>	"@R3t0C3r053t3nt4yUn0@",
+				'SistemaOperativo'	=>	"iOS",
+				'VersionSO'			=>	"8.1",
+				'TipoEquipo'		=>	"IPhone",
+				'ModeloEquipo'		=>	"6",
+				'Ip'				=>	"201.124.20.103",
+				'Hash'				=>	$hash
+			);
 
+		$rpu = "375262054121";
 
-		$client = new SoapClient("http://aplicaciones.cfe.gob.mx/WebServices/CFEMovil/CFEMovil.svc?wsdl");
+		$correo = "usuariotmp@example.com";
 
-		// $client->__setLocation('http://aplicaciones.cfe.gob.mx/WebServices/CFEMovil/CFEMovil.svc?wsdl/basic');
+		$observaciones  = "Favor de revisar el servicio";
 
-		$response = $client->ObtenerEstados(array( "Acceso" => $AccesoCliente));
+		$TipoFalla = "08";
 
-		echo json_encode($response);
+		$client = new SoapClient('http://aplicaciones.cfe.gob.mx/WebServices/CFEMovil/CFEMovil.svc?wsdl',array('trace' => true));
+ 
+  		$response = $client->SELReporteFallas(array("Acceso"=>$acceso , "Rpu"=>$rpu , "Correo"=>$correo, "Observaciones" =>$observaciones, "TipoFalla" => $TipoFalla));
 
-		// echo($client);
-
-		// $CFE_ObtenerEstadosParams = array
-		// (
-		// 	"Acceso" => $AccesoCliente
-		// );
-
-		// return $this->send_http_request(CFE_URLS::SEL_ObtenerEstados,$CFE_ObtenerEstadosParams);
+		return $response->SELReporteFallasResult->Folio;
 
 	}
 
@@ -136,8 +132,3 @@ class CFE_Controller extends CI_Controller {
 	
 }
 
-abstract class CFE_URLS
-{
-	const privateKey = "vlw3xMqy9LNjQMs5rE4z";
-    const SEL_ObtenerEstados = "http://aplicaciones.cfe.gob.mx/WebServices/CFEMovil/CFEMovil/ObtenerEstados";
-}

@@ -29,7 +29,8 @@ class user extends CFE_Controller {
 		$twitter	= $this->input->post('twitter');
 
 		error_reporting(E_ALL);
-ini_set('display_errors', 1);
+		ini_set('display_errors', TRUE);
+		ini_set('display_startup_errors', TRUE);
 		
 		
 		if($userID && $lat && $lng && $type && $subType && $desc && $city && $rpu && ($email || $twitter))
@@ -39,8 +40,9 @@ ini_set('display_errors', 1);
             $date = new DateTime();
 			$timestamp = $date->format('Y-m-d H:i:s');
 			
-            $uniqID = uniqid();
-            
+            $uniqID = substr(uniqid(), -4) . $this->CFE_ReporteFallas();
+            //$uniqID = uniqid();
+
             $newReport = array
             (
             	'userID'			=> $userID,
