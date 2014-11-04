@@ -249,6 +249,12 @@
                             <button id="assignWorker" class="btn btn-lg accept-btn">Asignar</button>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button id="removeReport" class="btn btn-lg accept-btn">Remover</button>
+                        </div>
+                    </div>
                 </div>
             </div>
            
@@ -328,6 +334,29 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                     <button type="button" id="confirmAddWorker" class="btn btn-primary">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Assign Worker Modal -->
+    <div class="modal fade" id="removeReportModal" tabindex="-1" role="dialog" aria-labelledby="removeReportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="removeReportModalLabel">Remover Reporte...</h4>
+                </div>
+                <div class="modal-body center-text">
+                    <h5>¿Seguro?</h5>
+                    <div class="invalidInputsReg" style="display: none;">
+                        <div class="alert-text alert alert-danger center-text" role="alert">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmRemove" class="btn btn-primary">Eliminar</button>
                 </div>
             </div>
         </div>
