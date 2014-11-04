@@ -55,7 +55,7 @@ class get_report extends CI_Model {
 		$this->db->select('user_data.pushToken');
 		$this->db->select('report_data.reportTicket');
 
-		$this->db->where_in('report_data.id',$reportID);
+		$this->db->where_in('report_data.reportTicket',$reportID);
 
 		$this->db->join('report_data', 'user_data.id = report_data.userID', 'left');
 
@@ -107,7 +107,7 @@ class get_report extends CI_Model {
 	function ticket_id($reportID)
 	{
 		$this->db->select('reportTicket');
-		$this->db->where('id',$reportID);
+		$this->db->where('reportTicket',$reportID);
 
 		return $this->db->get('report_data')->row()->reportTicket;
 	}
