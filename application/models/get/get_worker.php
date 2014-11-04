@@ -10,7 +10,7 @@ class get_worker extends CI_Model {
 	{
 		$this->db->where('workerID', $workerID);
 		$this->db->where('active', 1);
-		$this->db->select('id AS reportID,lat,lng,type,subType,desc,publicComments,privateComments,status,creationDate,lastUpdate');
+		$this->db->select('id, reportTicket AS reportID,lat,lng,type,subType,desc,publicComments,privateComments,status,creationDate,lastUpdate');
 		return $this->db->get('report_data')->result();
 	}
 	
