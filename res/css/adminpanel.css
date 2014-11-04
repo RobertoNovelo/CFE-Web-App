@@ -250,9 +250,19 @@
 	margin-bottom: 8px
 }
 
+#removeReport
+{
+	margin-top: 20px;
+}
+
 .push-form
 {
 	margin-top: 10vh;
+}
+
+#removeReport
+{
+	margin-top: 20px;
 }
 
 .push-form-item
