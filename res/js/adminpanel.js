@@ -75,6 +75,41 @@ $(function() {
 		$('#assignWorkerModal').modal();
 	});
 
+	$('#removeReport').on('click',function()
+	{
+		$('#removeReportModal').modal();
+	});
+
+	$('#confirmRemove').on('click',function()
+	{
+		$.post( "/remove/report", 
+		{
+			reportTicket: $("#itemReportIDLabel").text()
+		}, 
+		
+		function(response)
+		{
+			if(response.ok)
+			{
+				showCardErrorMessage('Eliminado!');
+				initServerData();
+				setTimeout(function()
+				{
+					$('#removeReportModal').modal('hide');
+					sectionManager(window, "all-all");
+				},2000);
+			}
+			else
+			{
+				showCardErrorMessage('Ocurrió un error al eliminar al empleado');
+			}
+		}, 'json')
+		.fail(function(d)
+		{
+			showCardErrorMessage('Ocurrió un error al eliminar al empleado');
+		});
+	});
+
 	$('#userPush').on('click', function()
 	{
 		var message = $('#userPushMessage').val();
