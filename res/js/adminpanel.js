@@ -743,7 +743,7 @@ function buildList(selector,subselector)
 					//Select type
 					if(subselector == serverData.data[k].dataType)
 					{
-						htmlChild = '<div class="row card-container list-item"> <div class="col-xs-4"> <div class="row"> <div class="col-xs-12"> <h5>Nombre:</h5> <h5>'+ serverData.data[k].workerName +'</h5> </div></div></div><div class="col-xs-4"> <div class="row"> <div class="col-xs-12"> <h5>Reportes Asignados:</h5> <h5>2</h5> </div></div></div><div class="col-xs-4"> </div></div>';
+						htmlChild = '<div class="row card-container list-item"> <div class="col-xs-4"> <div class="row"> <div class="col-xs-12"> <h5>Nombre:</h5> <h5>'+ serverData.data[k].workerName +'</h5> </div></div></div><div class="col-xs-4"> <div class="row"> <div class="col-xs-12"> <h5>Reportes Asignados:</h5> <h5>0</h5> </div></div></div><div class="col-xs-4"> </div></div>';
 						
 						//worker details button
 						//<button data-listworkeridentifier="' + k + '" class="btn btn-lg accept-btn listWorkerDetails">Detalles</button>
